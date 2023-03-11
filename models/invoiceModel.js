@@ -13,7 +13,7 @@ const invoiceSchema = new Schema(
       required: true,
     },
     paymentDue: {
-      type: Date,
+      type: String,
       required: true,
     },
     description: {
@@ -37,13 +37,50 @@ const invoiceSchema = new Schema(
       required: true,
     },
     senderAddress: {
-      type: Object,
-      required: true,
+      street: {
+        type: String,
+        required: true,
+      },
+      city: {
+        type: String,
+        required: true,
+      },
+      postCode: {
+        type: String,
+        required: true,
+      },
+      country: {
+        type: String,
+        required: true,
+      },
     },
     clientAddress: {
-      type: Object,
-      required: true,
+      street: {
+        type: String,
+        required: true,
+      },
+      city: {
+        type: String,
+        required: true,
+      },
+      postCode: {
+        type: String,
+        required: true,
+      },
+      country: {
+        type: String,
+        required: true,
+      },
     },
+    items: [
+      {
+        name: String,
+        quantity: Number,
+        price: Number,
+        total: Number,
+      },
+    ],
+
     total: {
       type: Number,
       required: true,
