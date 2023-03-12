@@ -1,5 +1,11 @@
 const express = require("express");
-const { createInvoice, getInvoice, getAllInvoices } = require("../controllers/invoiceController");
+const {
+  createInvoice,
+  getInvoice,
+  getAllInvoices,
+  deleteInvoice,
+  updateInvoice,
+} = require("../controllers/invoiceController");
 
 const router = express.Router();
 
@@ -13,13 +19,9 @@ router.get("/:id", getInvoice);
 router.post("/", createInvoice);
 
 // DELETE an invoice
-router.delete("/:id", (req, res) => {
-  res.json({ mssg: "delete an invoice" });
-});
+router.delete("/:id", deleteInvoice);
 
 // UPDATE an invoice
-router.patch("/:id", (req, res) => {
-  res.json({ mssg: "update an invoice" });
-});
+router.patch("/:id", updateInvoice);
 
 module.exports = router;

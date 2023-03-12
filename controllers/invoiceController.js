@@ -64,6 +64,40 @@ const createInvoice = async (req, res) => {
 
 // delete an invoice
 
-// update an invoice
+const deleteInvoice = async(req, res) => {
+  const { id } = req.params
 
-module.exports = { createInvoice, getInvoice, getAllInvoices };
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({error: "invoice does not exist"})
+  }
+
+  const invoice = await Invoice.findOneAndDelete({_id: id})
+
+  if (!invoice) {
+    return res.status(404).json({ error: "No such invoice" });
+  }
+
+  res.status(200).json(invoice);
+
+}
+
+// update an invoice
+const updateInvoice = async (req, res) => {
+  const { id } = req.params
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({error: "invoice does not exist"})
+  }
+
+  const invoice = await Invoice.findOneAndUpdate({_id: id}, {
+    ...req.body 
+  })
+
+  if (!invoice) {
+    return res.status(404).json({ error: "No such invoice" });
+  }
+
+  res.status(200).json(invoice);
+}
+
+module.exports = { createInvoice, getInvoice, getAllInvoices, deleteInvoice , updateInvoice};
