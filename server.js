@@ -1,11 +1,13 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const PORT = process.env.PORT;
 const invoicesRoutes = require("./routes/invoices");
 
 // app express
 const app = express();
+app.use(cors());
 
 // middleware
 app.use(express.json());
